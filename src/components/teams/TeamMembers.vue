@@ -9,6 +9,8 @@
         :role="member.role"
       ></user-item>
     </ul>
+    <!-- simulate creating a way to navigate to another component down the line sequentially -->
+    <router-link :to="'/teams/'+">Go to Team 2</router-link>
   </section>
 </template>
 
@@ -26,9 +28,10 @@ export default {
       members: []
     };
   },
-  created(){
-    //the name after .params is the same as what you put in Path in main.js
-    const teamId =this.$route.params.teamId;
+  methods:{
+    loadTeamMembers(route){
+      //the name after .params is the same as what you put in Path in main.js
+      const teamId = route.params.teamId;
     const selectedTeam = this.teams.find(team=>team.id = teamId);
     const members = selectedTeam.members;
     const selectedMembers = []
@@ -38,6 +41,15 @@ export default {
     }
     this.members = selectedMembers;
     this.teamNane = selectedTeam.name;
+    }
+  },
+  created(){
+    this.loadTeamMembers(this.$route);
+  },
+  watch: {
+    $route(newRoute){
+      this.loadTeamMembers(newRoute)
+    }
   }
 };
 </script>
