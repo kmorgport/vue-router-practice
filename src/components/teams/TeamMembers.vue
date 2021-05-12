@@ -22,18 +22,22 @@ export default {
   },
   data() {
     return {
-      teamName: 'Test',
-      members: [
-        { id: 'u1', fullName: 'Max Schwarz', role: 'Engineer' },
-        { id: 'u2', fullName: 'Max Schwarz', role: 'Engineer' },
-      ],
+      teamNane: '',
+      members: []
     };
   },
   created(){
     //the name after .params is the same as what you put in Path in main.js
     const teamId =this.$route.params.teamId;
     const selectedTeam = this.teams.find(team=>team.id = teamId);
-    const 
+    const members = selectedTeam.members;
+    const selectedMembers = []
+    for(const member of members){
+      const selectedUser = this.users.find(user=> user.id === member)
+      selectedMembers.push(selectedUser);
+    }
+    this.members = selectedMembers;
+    this.teamNane = selectedTeam.name;
   }
 };
 </script>
