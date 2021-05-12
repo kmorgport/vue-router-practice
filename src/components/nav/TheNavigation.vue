@@ -12,18 +12,7 @@
       </ul>
     </nav>
   </header>
-</template>
-
-// <script>
-// export default {
-//   emits: ['set-page'],
-//   methods: {
-//     setActivePage(page) {
-//       this.$emit('set-page', page);
-//     },
-//   },
-// };
-// </script>
+</template> 
 
 <style scoped>
 header {
@@ -62,7 +51,8 @@ a {
 }
 
 a:hover,
-a:active {
+a:active,
+a.active {
   color: #f1a80a;
   border-color: #f1a80a;
   background-color: #1a037e;

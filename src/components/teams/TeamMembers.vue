@@ -16,6 +16,7 @@
 import UserItem from '../users/UserItem.vue';
 
 export default {
+  inject: ['users', 'teams'],
   components: {
     UserItem
   },
@@ -28,6 +29,12 @@ export default {
       ],
     };
   },
+  created(){
+    //the name after .params is the same as what you put in Path in main.js
+    const teamId =this.$route.params.teamId;
+    const selectedTeam = this.teams.find(team=>team.id = teamId);
+    const 
+  }
 };
 </script>
 
