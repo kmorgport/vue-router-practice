@@ -12,11 +12,17 @@ const router = createRouter({
     routes: [
         {path: '/', redirect: '/teams'},
         //with alias the url does not change
-        { path: '/teams', component: TeamsList }, //when /teams is loaded a certain component is loaded
+        { 
+            name: 'teams',
+            path: '/teams', 
+            component: TeamsList, 
+            children: [
+                { name: 'team-members', path: '/teams/:teamId', component: TeamMembers, props:true}
+            ] 
+        }, //when /teams is loaded a certain component is loaded
         { path: '/users', component: UsersList } ,
         // dynamic parameters should be passed into component as props rather than just $route property
         // :teamId will be passed into the named component as a prop
-        { path: '/teams/:teamId', component: TeamMembers, props:true},
         {path: '/:notFound(.*)', component: NotFound}
     ],
     linkActiveClass: 'active'

@@ -1,4 +1,8 @@
 <template>
+  <!-- nested router views control nested child routes inside routes -->
+  <!-- what does this mean practically? by nesting the route instead of side by side, the clicked on component activates 
+  where teh nested router-view element is, instead of changing pages to a new route path on a different screen -->
+  <router-view></router-view>
   <ul>
     <teams-item
       v-for="team in teams"

@@ -1,6 +1,7 @@
 <template>
   <the-navigation></the-navigation>
   <main>
+    <!-- router-view only responsible for root route -->
     <router-view></router-view>
   </main>
 </template>
