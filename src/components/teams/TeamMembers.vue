@@ -10,7 +10,7 @@
       ></user-item>
     </ul>
     <!-- simulate creating a way to navigate to another component down the line sequentially -->
-    <router-link :to="'/teams/'+">Go to Team 2</router-link>
+    <router-link to="/teams/t2">Go to Next Team</router-link>
   </section>
 </template>
 
@@ -24,19 +24,31 @@ export default {
   },
   data() {
     return {
-      teamNane: '',
+      teamName: '',
       members: []
     };
   },
+  // computed:{
+  //   nextId(){
+  //     const teamId = this.$route.params.teamId;
+  //     const currentTeam = this.teams.find(team=>team.id = teamId);
+  //     const index = this.teams.indexOf(currentTeam);
+  //     if(index+1 > this.teams.length){
+  //       return 1;
+  //     }else{
+  //       return index+1;
+  //     }
+  //   }
+  // },
   methods:{
     loadTeamMembers(route){
       //the name after .params is the same as what you put in Path in main.js
-      const teamId = route.params.teamId;
-    const selectedTeam = this.teams.find(team=>team.id = teamId);
+    const teamId = route.params.teamId;
+    const selectedTeam = this.teams.find((team)=>team.id === teamId);
     const members = selectedTeam.members;
     const selectedMembers = []
     for(const member of members){
-      const selectedUser = this.users.find(user=> user.id === member)
+      const selectedUser = this.users.find((user)=> user.id === member)
       selectedMembers.push(selectedUser);
     }
     this.members = selectedMembers;
@@ -48,7 +60,9 @@ export default {
   },
   watch: {
     $route(newRoute){
+      if(newRoute.params.teamId){
       this.loadTeamMembers(newRoute)
+      }
     }
   }
 };
