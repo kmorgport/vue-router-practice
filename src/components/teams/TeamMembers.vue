@@ -19,6 +19,8 @@ import UserItem from '../users/UserItem.vue';
 
 export default {
   inject: ['users', 'teams'],
+  //remember when importing props from path, the prop HAS TO MATCH whats in the prop
+  props: ['teamId'],
   components: {
     UserItem
   },
@@ -41,9 +43,10 @@ export default {
   //   }
   // },
   methods:{
-    loadTeamMembers(route){
+    //dont forget to use different namespaces....the overuse in these examples is....a choice....
+    loadTeamMembers(teamId){
       //the name after .params is the same as what you put in Path in main.js
-    const teamId = route.params.teamId;
+    // const teamId = route.params.teamId;
     const selectedTeam = this.teams.find((team)=>team.id === teamId);
     const members = selectedTeam.members;
     const selectedMembers = []
@@ -56,13 +59,11 @@ export default {
     }
   },
   created(){
-    this.loadTeamMembers(this.$route);
+    this.loadTeamMembers(this.teamId);
   },
   watch: {
-    $route(newRoute){
-      if(newRoute.params.teamId){
-      this.loadTeamMembers(newRoute)
-      }
+    teamId(newId){
+      this.loadTeamMembers(newId)
     }
   }
 };
