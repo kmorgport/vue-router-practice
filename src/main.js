@@ -6,6 +6,8 @@ import TeamsList from './components/teams/TeamsList.vue'
 import UsersList from './components/users/UsersList.vue'
 import TeamMembers from './components/teams/TeamMembers.vue'
 import NotFound from './components/nav/NotFound.vue'
+import TeamsFooter from './components/teams/TeamsFooter.vue';
+import UsersFooter from './components/teams/UserFooter.vue'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -15,12 +17,18 @@ const router = createRouter({
         { 
             name: 'teams',
             path: '/teams', 
-            component: TeamsList, 
+            components: {default: TeamsList, footer: TeamsFooter },
             children: [
                 { name: 'team-members', path: '/teams/:teamId', component: TeamMembers, props:true}
             ] 
         }, //when /teams is loaded a certain component is loaded
-        { path: '/users', component: UsersList } ,
+        { 
+        path: '/users', 
+        components: {
+            default: UsersList,
+            footer: UsersFooter
+            } 
+        },
         // dynamic parameters should be passed into component as props rather than just $route property
         // :teamId will be passed into the named component as a prop
         {path: '/:notFound(.*)', component: NotFound}

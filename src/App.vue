@@ -2,8 +2,12 @@
   <the-navigation></the-navigation>
   <main>
     <!-- router-view only responsible for root route -->
+    <!-- when using multiple router views you can have one default unnamed router view -->
     <router-view></router-view>
   </main>
+  <footer>
+    <router-view name="footer"></router-view>
+  </footer>
 </template>
 
 <script>
