@@ -27,14 +27,35 @@ const router = createRouter({
         components: {
             default: UsersList,
             footer: UsersFooter
-            } 
+            },
+            // beforeEnter(to, from , next){
+            //     console.log(to, from );
+            //     next()
+            // }
         },
         // dynamic parameters should be passed into component as props rather than just $route property
         // :teamId will be passed into the named component as a prop
         {path: '/:notFound(.*)', component: NotFound}
     ],
-    linkActiveClass: 'active'
+    linkActiveClass: 'active',
+    scrollBehavior(_, _2, savedPosition){
+        if(savedPosition){
+            return savedPosition;
+        }
+        return {left:0, top: 0}
+    }
 });
+
+// router.beforeEach(function(to,from,next){
+//     console.log(to, from)
+//     next();
+// })
+
+
+// router.afterEach((to, from)=>{
+//     //sends analytics
+//     //doesnt control what the user sees on the screen
+// })
 
 const app = createApp(App)
 app.use(router)
